@@ -19,6 +19,16 @@ function TextFrom(props) {
     alert("Converted to Lower Case")
   }
 
+  const handleCopyText = ()=>{
+    const copyText = text;
+    navigator.clipboard.writeText(copyText);
+  }
+
+  const handleExtraSpaces = ()=>{
+    const newText = text.split(/[ ]+/);
+    setText(newText.join(" "))
+  }
+
   return (
     <>
       <h1>{props.heading}</h1>
@@ -36,6 +46,12 @@ function TextFrom(props) {
       </button>
       <button className="btn btn-primary mx-2" onClick={toLower}>
         Convert to Lower Case
+      </button>
+      <button className="btn btn-primary mx-2" onClick={handleCopyText}>
+        Copy Text
+      </button>
+      <button className="btn btn-primary mx-2" onClick={handleExtraSpaces}>
+        Remove Spaces
       </button>
       <div className="container my-3">
         <h2>Your text summary here.</h2>
