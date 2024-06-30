@@ -7,16 +7,26 @@ import React, {useState} from 'react';
 function App() {
   const [mode, setMode] = useState('light');
   const [alert, setAlert] = useState(null); // set intial state to null
+  const [title, setTitle] = useState('');
+  
+
+  const updateTitle= (msg) =>{
+    setTitle(msg)
+  }
 
   const toggleMode =()=>{
     if(mode === 'light'){
       setMode('dark');
       document.body.style.backgroundColor = "#26355D";
+      updateTitle("TextUtils - Light Mode")
+      document.title = title;
       showAlert("Dark Mode has been enabled", "success");
     }
     else{
       setMode('light');
       document.body.style.backgroundColor = "white";
+      updateTitle("TextUtils - Dark Mode")
+      document.title = title;
       showAlert("Light Mode has been enabled", "success");
     }
   }
