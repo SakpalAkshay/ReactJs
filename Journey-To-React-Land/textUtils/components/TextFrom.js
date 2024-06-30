@@ -10,23 +10,25 @@ function TextFrom(props) {
   const toUpper = () => {
     const newText = text.toUpperCase();
     setText(newText);
-    alert("Converted to Uppercase");
+    props.showAlert("Converted to UpperCase", "success")
   };
 
   const toLower = ()=>{
     const newText = text.toLowerCase();
     setText(newText);
-    alert("Converted to Lower Case")
+    props.showAlert("Converted to LowerCase", "success")
   }
 
   const handleCopyText = ()=>{
     const copyText = text;
     navigator.clipboard.writeText(copyText);
+    props.showAlert("Text Copied", "info")
   }
 
   const handleExtraSpaces = ()=>{
     const newText = text.split(/[ ]+/);
     setText(newText.join(" "))
+    props.showAlert("Extra Spaces Removed", "info")
   }
 
   return (
