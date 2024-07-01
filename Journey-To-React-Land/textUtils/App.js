@@ -1,8 +1,13 @@
-//mport About from "./components/About";
+import About from "./components/About";
 import Alerts from "./components/Alerts";
 import Navbar from "./components/Navbar";
 import TextFrom from "./components/TextFrom";
 import React, {useState} from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -43,17 +48,28 @@ function App() {
   }
 
   return (
+    <Router>
     <>
     <Navbar title="TextUtils" mode = {mode} toggleMode = {toggleMode}/> 
     {//we passed a function as a property to be used in Navbar Component
     }
     <Alerts alert={alert}/>
+    <div className="container my-3">
+    <Routes>
+      <Route exact path="/" element={ <TextFrom heading="Enter text here to analyze" showAlert = {showAlert}mode = {mode}/>}>
+     
+      </Route>
     
-    <div className="container my-3"><TextFrom heading="Enter text here to analyze" showAlert = {showAlert}mode = {mode}/></div>
+      <Route exact path="/about" element={<About />}>
+      </Route>
    
-   {// <About/> 
-   }
+      </Routes>
+   
+  
+   </div>
     </>
+    </Router>
+  
   );
 }
 
