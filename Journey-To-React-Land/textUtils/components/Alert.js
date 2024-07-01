@@ -7,8 +7,11 @@ export default function Alerts(props) {
     }
 
   return ( //shot circuting as we would provide value once any operation gets performed
+<div className='mb-3' style={{height: "7vh"}}>
+{
     props.alert && <div className={`alert alert-${props.alert.type} alert-dismissible fade show`} role="alert">
   <strong>{capitalize(props.alert.type)} : </strong> {props.alert.msg}
+</div> }
 </div>
   )
 }
