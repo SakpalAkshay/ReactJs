@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 
+
 function TextFrom(props) {
   const [text, setText] = useState("");
+  const [btnDisable, setButtonDisabled] = useState(true);
   const handleChange = (e) => {
     setText(e.target.value);
     //console.log("On change was triggered")
+    if(text.length < 2){
+      setButtonDisabled(true)
+    }
+    else{
+      setButtonDisabled(false)
+    }
   };
 
   const toUpper = () => {
@@ -33,7 +41,7 @@ function TextFrom(props) {
 
   return (
     <>
-      <h1 style={{color: props.mode ==="dark"? "white": "#26355D"}} >{props.heading}</h1>
+      <h1  style={{color: props.mode ==="dark"? "white": "#26355D"}} >{props.heading}</h1>
       <div className="mb-3 container">
         <textarea
           className="form-control"
@@ -44,22 +52,22 @@ function TextFrom(props) {
           style={{color: props.mode ==="dark"? "white": "#26355D", backgroundColor: props.mode ==="dark"? "#5C88C4": "white"}}
         ></textarea>
       </div>
-      <button className="btn btn-primary mx-2" onClick={toUpper}>
+      <button className="btn btn-primary mx-2" onClick={toUpper} disabled= {btnDisable}>
         Convert to Upper Case
       </button>
-      <button className="btn btn-primary mx-2" onClick={toLower}>
+      <button className="btn btn-primary mx-2" onClick={toLower} disabled= {btnDisable}>
         Convert to Lower Case
       </button>
-      <button className="btn btn-primary mx-2" onClick={handleCopyText}>
+      <button className="btn btn-primary mx-2" onClick={handleCopyText} disabled= {btnDisable}>
         Copy Text
       </button>
-      <button className="btn btn-primary mx-2" onClick={handleExtraSpaces}>
+      <button className="btn btn-primary mx-2" onClick={handleExtraSpaces} disabled= {btnDisable} >
         Remove Spaces
       </button>
       <div className="container my-3" style={{color: props.mode ==="dark"? "white": "#26355D"}}>
         <h2>Your text summary here.</h2>
-        <p>{text.split(" ").length} words, {text.length} characters</p>
-        <p>Time to Read : {(text.split(" ").length * 0.5 / 60).toFixed(2)  } min </p>
+        <p>{text.split(" ").filter((ele)=> { return ele.length !==0}).length} words, {text.length} characters</p>
+        <p>Time to Read : {((text.split(" ").filter((ele)=> { return ele.length !==0}).length) * 0.5 / 60).toFixed(2)  } min </p>
         <h2>Preview</h2>
         <p>{text}</p>
       </div>
