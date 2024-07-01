@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-
+import { useSpeechSynthesis } from 'react-speech-kit';
 
 function TextFrom(props) {
   const [text, setText] = useState("");
   const [btnDisable, setButtonDisabled] = useState(true);
+  const { speak } = useSpeechSynthesis();
   const handleChange = (e) => {
     setText(e.target.value);
     //console.log("On change was triggered")
@@ -39,6 +40,10 @@ function TextFrom(props) {
     props.showAlert("Extra Spaces Removed", "info")
   }
 
+  const handleSpeech = () =>{
+    speak({text});
+  }
+
   return (
     <>
       <h1  style={{color: props.mode ==="dark"? "white": "#26355D"}} >{props.heading}</h1>
@@ -63,6 +68,9 @@ function TextFrom(props) {
       </button>
       <button className="btn btn-primary mx-2" onClick={handleExtraSpaces} disabled= {btnDisable} >
         Remove Spaces
+      </button>
+      <button className="btn btn-primary mx-2" onClick={handleSpeech} disabled= {btnDisable} >
+        Speak
       </button>
       <div className="container my-3" style={{color: props.mode ==="dark"? "white": "#26355D"}}>
         <h2>Your text summary here.</h2>
